@@ -8,8 +8,8 @@ app.use(cors())
 app.use(express.json())
 
 
-mongoose.connect("mongodb+srv://IbadUllahKhan:<db_password>@cluster0.pbwdvv1.mongodb.net/")
-app.post('/Create',(req,res)=>{
+mongoose.connect("mongodb+srv://IbadUllahKhan:Ibad2004@cluster0.pbwdvv1.mongodb.net/Crud")
+app.post('/create',(req,res)=>{
     UserModel.create(req.body)
 .then(user=>res.json(user))
 .catch(err=>res.json(err))

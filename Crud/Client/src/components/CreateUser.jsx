@@ -9,7 +9,7 @@ const [email, setEmail]=useState();
 const [age, setAge]=useState();
 const Submit=(e)=>{
 e.preventDefault()
-axios.post("htpp:/localhost:5000/Create",{name,email,age})
+axios.post("http://localhost:5000/create",{name,email,age})
 .then(result=>console.log(result))
 .catch(err=>console.log(err)
 )

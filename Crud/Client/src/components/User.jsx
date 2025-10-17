@@ -15,7 +15,7 @@ function User() {
         <div className="flex justify-between items-center bg-blue-600 text-white px-6 py-4">
           <h2 className="text-2xl font-bold tracking-wide">User Management</h2>
           <Link
-            to="/Create"
+            to="/create"
             className="bg-white text-blue-600 font-semibold hover:bg-blue-50 py-2 px-4 rounded-md transition-all shadow-md"
           >
             + Add User
