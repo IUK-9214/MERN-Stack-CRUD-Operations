@@ -1,6 +1,39 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useParams ,useNavigate} from 'react-router-dom'
+
 
 function UpdateUser() {
+
+const{id}=useParams()
+ 
+const [name, setName]=useState();
+const [email, setEmail]=useState();
+const [age, setAge]=useState();
+const navigate=useNavigate();
+
+
+useEffect(()=>{
+  axios.get('http://localhost:5000/getUser/'+id)
+  .then(result=>{console.log(result)
+  setName(result.data.name)
+  setEmail(result.data.email)
+  setAge(result.data.age)
+  }
+  )
+  .catch(err=>console.log(err)
+  )},[id])
+
+const Updated =(e)=>{
+  e.preventDefault()
+  axios.put('http://localhost:5000/UpdateUser/'+id,{name,email,age})
+  .then(result=>{
+    console.log(result)
+    navigate('/')
+  })
+  .catch(err=>console.log(err)
+  )
+}
   return (
      <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-600 to-indigo-700 p-6">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden p-8">
@@ -9,7 +42,7 @@ function UpdateUser() {
           Update User
         </h1>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={Updated}>
           {/* Name */}
           <div className="flex flex-col">
             <label htmlFor="Name" className="text-gray-700 font-semibold mb-1">
@@ -20,6 +53,8 @@ function UpdateUser() {
               placeholder="Enter full name"
               name="Name"
               className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+             value={name}
+             onChange={(e)=>setName(e.target.value)}
             />
           </div>
 
@@ -33,6 +68,8 @@ function UpdateUser() {
               placeholder="Enter email address"
               name="Email"
               className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
 
@@ -46,6 +83,8 @@ function UpdateUser() {
               placeholder="Enter age"
               name="Age"
               className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+           value={age}
+           onChange={(e)=>setAge(e.target.value)}
             />
           </div>
 
@@ -54,6 +93,7 @@ function UpdateUser() {
             <button
               type="submit"
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-200"
+            
             >
               Update
             </button>

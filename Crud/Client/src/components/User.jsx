@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function User() {
-  const [user, setUser] = useState([
-    { Name: "Ibad", Email: "Ibad5000@gmail.com", Age: 20 },
-    { Name: "Ali", Email: "Ali123@gmail.com", Age: 22 },
-    { Name: "Sara", Email: "SaraKhan@gmail.com", Age: 19 },
-  ])
+  const [user, setUser] = useState([])
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000') 
+    .then(result=>setUser(result.data))
+    .catch(err=>console.log(err))   
+  })
+
+  const handleDelete=(_id)=>{
+
+  }
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-600 to-indigo-700 p-6">
@@ -40,20 +47,22 @@ function User() {
                   key={index}
                   className="hover:bg-blue-50 transition-all duration-200"
                 >
-                  <td className="py-3 px-4 border-b border-gray-200">{u.Name}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">{u.Email}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">{u.Age}</td>
+                  <td className="py-3 px-4 border-b border-gray-200">{u.name}</td>
+                  <td className="py-3 px-4 border-b border-gray-200">{u.email}</td>
+                  <td className="py-3 px-4 border-b border-gray-200">{u.age}</td>
                   <td className="py-3 px-4 border-b border-gray-200">
                     <div className="flex justify-center gap-2">
                       <Link
-            to="/Update"
+            to={`/Update/${u._id}`}
             className="bg-blue-600 text-white font-semibold hover:bg-blue-700 py-2 px-4 rounded-md transition-all shadow-md"
           >
          Update
           </Link>
                       <button
                       
-                      className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm transition-all">
+                      className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm transition-all"
+                      onClick={handleDelete(user._id)}
+                      >
                         Delete
                       </button>
                     </div>
