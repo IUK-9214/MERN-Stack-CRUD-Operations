@@ -40,6 +40,17 @@ app.put('/UpdateUser/:id',(req,res)=>{
 
 })
 
+
+app.delete('/deleteUser/:id', (req,res)=>{
+
+    const id=req.params.id;
+    UserModel.findByIdAndDelete({_id:id})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+    
+}
+)
+
 app.post('/create',(req,res)=>{
 
     UserModel.create(req.body)

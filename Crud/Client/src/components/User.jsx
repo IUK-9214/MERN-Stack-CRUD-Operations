@@ -11,8 +11,12 @@ function User() {
     .catch(err=>console.log(err))   
   })
 
-  const handleDelete=(_id)=>{
-
+  const handleDelete=(id)=>{
+    axios.delete('http://localhost:5000/deleteUser/'+id)
+    .then(res=>console.log(res)
+    )
+    .catch(err=>console.log(err)
+    )
   }
 
   return (
@@ -61,7 +65,7 @@ function User() {
                       <button
                       
                       className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm transition-all"
-                      onClick={handleDelete(user._id)}
+                      onClick={()=>handleDelete(u._id)}
                       >
                         Delete
                       </button>
