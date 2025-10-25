@@ -12,7 +12,7 @@ const corsOptions = {
     "https://mern-stack-crud-operations-neon.vercel.app", // frontend domain
     "http://localhost:5173" // optional for local dev
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["get", "post", "put", "delete"],
   credentials: true
 };
 app.use(cors(corsOptions));
