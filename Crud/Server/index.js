@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.get('/', (req, res) => {
   console.log("hello")
-  UserModel.find({})
+  UserModel.find()
     .then(users => res.json(users))
     .catch(err => res.json(err));
 });
