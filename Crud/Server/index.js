@@ -6,15 +6,16 @@ require('dotenv').config();
 
 const app = express();
 
-// ✅ Allow frontend origin (your React app)
+// ✅ Correct CORS configuration
 const corsOptions = {
   origin: [
-    "https://mern-stack-crud-operations-git-main-ibad-ullah-khans-projects.vercel.app", // frontend domain
-    "http://localhost:5000" // optional for local dev
+    "https://mern-stack-crud-operations-5zzrdt73b-ibad-ullah-khans-projects.vercel.app", // deployed frontend
+    "http://localhost:5173" // optional local frontend
   ],
-  methods: ["get", "post", "put", "delete"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -69,5 +70,5 @@ app.post('/create', (req, res) => {
     .catch(err => res.status(500).json({ error: err.message }));
 });
 
-// ✅ Export (no app.listen)
+// ✅ Export for Vercel serverless function
 module.exports = app;
