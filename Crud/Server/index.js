@@ -5,17 +5,7 @@ const UserModel = require('./models/Users');
 require('dotenv').config();
 
 const app = express();
-
-// ✅ Correct CORS configuration
-app.use(cors({
-  origin: [
-    "https://mern-stack-crud-operations-neon.vercel.app", // your frontend
-    "http://localhost:5173" // optional for local testing
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
-  credentials: true
-}));
+app.use(cors())
 
 app.use(express.json());
 app.options("*", cors()); 
