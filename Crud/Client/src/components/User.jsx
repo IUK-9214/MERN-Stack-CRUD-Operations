@@ -6,13 +6,13 @@ function User() {
   const [user, setUser] = useState([])
 
   useEffect(()=>{
-    axios.get(`${import.meta.env.VITE_API_URL}`) 
+    axios.get("https://mern-stack-crud-operations-hazel.vercel.app") 
     .then(result=>setUser(result.data))
     .catch(err=>console.log(err))   
   })
 
   const handleDelete=(id)=>{
-    axios.delete(`${import.meta.env.VITE_API_URL}/deleteUser/${id}`)
+    axios.delete(`https://mern-stack-crud-operations-hazel.vercel.app/deleteUser/${id}`)
     .then(res=>console.log(res)
     )
     .catch(err=>console.log(err)
