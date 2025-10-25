@@ -6,7 +6,16 @@ const UserModel = require('./models/Users');
 require('dotenv').config(); // Load .env
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',                     // for local dev
+    'https://mern-stack-crud-operations-neon.vercel.app/' // your frontend deployed on Vercel
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Connect to MongoDB
