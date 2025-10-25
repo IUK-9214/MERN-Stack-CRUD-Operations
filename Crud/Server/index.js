@@ -9,7 +9,7 @@ const app = express();
 // ✅ Allow frontend origin (your React app)
 const corsOptions = {
   origin: [
-    "https://mern-stack-crud-operations-2ng9i6ctd-ibad-ullah-khans-projects.vercel.app", // frontend domain
+    "mern-stack-crud-operations-neon.vercel.app", // frontend domain
     "http://localhost:5000" // optional for local dev
   ],
   methods: ["get", "post", "put", "delete"],
