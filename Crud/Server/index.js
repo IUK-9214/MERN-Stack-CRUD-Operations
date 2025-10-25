@@ -13,9 +13,7 @@ app.options("*", cors());
 // ✅ MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected Successfully"))
-  .catch(err => {
-    console.error("❌ MongoDB Connection Error:", err.message);
-  });
+  .catch(err => console.error("❌ MongoDB Connection Error:", err.message));
 
 // ✅ Root route (test)
 app.get('/', (req, res) => {
