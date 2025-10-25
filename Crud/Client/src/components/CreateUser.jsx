@@ -12,7 +12,7 @@ const navigate=useNavigate()
 
 const Submit=(e)=>{
 e.preventDefault()
-axios.post(`${import.meta.env.VITE_API_URL}create`,{name,email,age})
+axios.post(`${import.meta.env.VITE_API_URL}/create`,{name,email,age})
 .then(result=>
 {
   console.log(result)
