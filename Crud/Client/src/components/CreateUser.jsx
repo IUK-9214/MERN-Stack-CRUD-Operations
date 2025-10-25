@@ -12,7 +12,7 @@ function CreateUser() {
 
   const Submit = (e) => {
     e.preventDefault()
-    axios.post(`https://mern-stack-crud-operations-hazel.vercel.app/create`, { name, email, age })
+    axios.post(`${import.meta.env.VITE_API_URL}/create`, { name, email, age })
       .then(result => {
         console.log(result)
         navigate('/')
