@@ -6,13 +6,13 @@ function User() {
   const [user, setUser] = useState([])
 
   useEffect(()=>{
-    axios.get('http://localhost:5000') 
+    axios.get(`${import.meta.env.VITE_API_URL}`) 
     .then(result=>setUser(result.data))
     .catch(err=>console.log(err))   
   })
 
   const handleDelete=(id)=>{
-    axios.delete('http://localhost:5000/deleteUser/'+id)
+    axios.delete(`${import.meta.env.VITE_API_URL}/deleteUser/${id}`)
     .then(res=>console.log(res)
     )
     .catch(err=>console.log(err)
