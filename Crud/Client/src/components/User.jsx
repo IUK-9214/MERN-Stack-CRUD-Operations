@@ -12,7 +12,7 @@ function User() {
   })
 
   const handleDelete=(id)=>{
-    axios.delete(`${import.meta.env.VITE_API_URL}/deleteUser/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}deleteUser/${id}`)
     .then(res=>console.log(res)
     )
     .catch(err=>console.log(err)
