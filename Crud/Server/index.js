@@ -7,14 +7,17 @@ require('dotenv').config(); // Load .env
 
 const app = express();
 
-app.use(cors({
+const corsOptions = {
   origin: [
-    'http://localhost:5173',                     // for local dev
-    'https://mern-stack-crud-operations-neon.vercel.app/' // your frontend deployed on Vercel
+    "https://mern-stack-crud-operations-neon.vercel.app", // your frontend URL
+    "http://localhost:5000" // optional: for local testing
   ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
+
 
 app.use(express.json());
 
