@@ -27,11 +27,14 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error("❌ Connection Error:", err));
 
 // Routes
-app.get('/', (req, res) => {
-  console.log("hello")
-  UserModel.find()
-    .then(users => res.json(users))
-    .catch(err => res.json(err));
+app.get('/', async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users || []); // Always send array
+  } catch (err) {
+    console.error("❌ Fetch error:", err);
+    res.status(500).json({ error: "Server Error" });
+  }
 });
 
 app.get('/getUser/:id', (req, res) => {

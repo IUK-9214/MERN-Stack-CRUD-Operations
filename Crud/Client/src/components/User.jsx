@@ -5,11 +5,21 @@ import { Link } from 'react-router-dom'
 function User() {
   const [user, setUser] = useState([])
 
-  useEffect(()=>{
-    axios.get(`${import.meta.env.VITE_API_URL}`) 
-    .then(result=>setUser(result.data))
-    .catch(err=>console.log(err))   
-  },[])
+  useEffect(() => {
+  axios.get(`${import.meta.env.VITE_API_URL}`)
+    .then(res => {
+      if (Array.isArray(res.data)) {
+        setUser(res.data);
+      } else {
+        setUser([]); // fallback to avoid map error
+      }
+    })
+    .catch(err => {
+      console.error("❌ Error fetching users:", err);
+      setUser([]); // fallback
+    });
+}, []);
+
 
   const handleDelete=(id)=>{
     axios.delete(`${import.meta.env.VITE_API_URL}/deleteUser/${id}`)
