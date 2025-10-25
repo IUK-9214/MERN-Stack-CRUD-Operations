@@ -9,7 +9,7 @@ const app = express();
 // ✅ Correct CORS configuration
 const corsOptions = {
   origin: [
-    "https://mern-stack-crud-operations-5zzrdt73b-ibad-ullah-khans-projects.vercel.app", // deployed frontend
+    "https://mern-stack-crud-operations-neon.vercel.app", // deployed frontend
     "http://localhost:5173" // optional local frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
