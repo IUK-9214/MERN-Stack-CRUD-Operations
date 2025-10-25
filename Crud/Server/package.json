@@ -4,7 +4,8 @@
   "description": "Express backend for CRUD app",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "Users":"/models/Users.js"
   },
   "keywords": [],
   "author": "",
