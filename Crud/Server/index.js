@@ -2,35 +2,39 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
-
-require('dotenv').config(); // Load .env
+require('dotenv').config();
 
 const app = express();
 
+// ✅ Allow frontend origin (your React app)
 const corsOptions = {
   origin: [
-    "https://mern-stack-crud-operations-neon.vercel.app", // your frontend URL
-    "http://localhost:5000" // optional: for local testing
+    "https://mern-stack-crud-operations-neon.vercel.app", // frontend domain
+    "http://localhost:5173" // optional for local dev
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 };
-
 app.use(cors(corsOptions));
-
-
 app.use(express.json());
 
-// Connect to MongoDB
+// ✅ MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected Successfully"))
-  .catch(err => console.error("❌ Connection Error:", err));
+  .catch(err => {
+    console.error("❌ MongoDB Connection Error:", err.message);
+  });
 
-// Routes
-app.get('/', async (req, res) => {
+// ✅ Root route (test)
+app.get('/', (req, res) => {
+  res.send("🚀 Backend is running successfully!");
+});
+
+// ✅ CRUD Routes
+app.get('/users', async (req, res) => {
   try {
     const users = await UserModel.find();
-    res.status(200).json(users || []); // Always send array
+    res.status(200).json(users || []);
   } catch (err) {
     console.error("❌ Fetch error:", err);
     res.status(500).json({ error: "Server Error" });
@@ -38,38 +42,32 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/getUser/:id', (req, res) => {
-  const id = req.params.id;
-  UserModel.findById({ _id: id })
+  UserModel.findById(req.params.id)
     .then(user => res.json(user))
-    .catch(err => res.json(err));
+    .catch(err => res.status(500).json({ error: err.message }));
 });
 
-app.put('/UpdateUser/:id', (req, res) => {
-  const id = req.params.id;
+app.put('/updateUser/:id', (req, res) => {
   UserModel.findByIdAndUpdate(
-    { _id: id },
+    req.params.id,
     { name: req.body.name, email: req.body.email, age: req.body.age },
     { new: true }
   )
     .then(updatedUser => res.json(updatedUser))
-    .catch(err => res.json(err));
+    .catch(err => res.status(500).json({ error: err.message }));
 });
 
 app.delete('/deleteUser/:id', (req, res) => {
-  const id = req.params.id;
-  UserModel.findByIdAndDelete({ _id: id })
+  UserModel.findByIdAndDelete(req.params.id)
     .then(result => res.json(result))
-    .catch(err => res.json(err));
+    .catch(err => res.status(500).json({ error: err.message }));
 });
 
 app.post('/create', (req, res) => {
   UserModel.create(req.body)
     .then(user => res.json(user))
-    .catch(err => res.json(err));
+    .catch(err => res.status(500).json({ error: err.message }));
 });
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-}); 
+// ✅ Export (no app.listen)
+module.exports = app;
