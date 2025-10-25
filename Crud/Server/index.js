@@ -7,16 +7,16 @@ require('dotenv').config();
 const app = express();
 
 // ✅ Correct CORS configuration
-const corsOptions = {
+app.use(cors({
   origin: [
-    "https://mern-stack-crud-operations-neon.vercel.app", // deployed frontend
-    "http://localhost:5173" // optional local frontend
+    "https://mern-stack-crud-operations-neon.vercel.app", // your frontend
+    "http://localhost:5173" // optional for local testing
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
   credentials: true
-};
+}));
 
-app.use(cors(corsOptions));
 app.use(express.json());
 
 // ✅ MongoDB Connection
