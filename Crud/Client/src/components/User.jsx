@@ -46,18 +46,18 @@ function User() {
             </thead>
 
             <tbody className="text-gray-700">
-              {user.map((u, index) => (
+              {user.map((user, index) => (
                 <tr
                   key={index}
                   className="hover:bg-blue-50 transition-all duration-200"
                 >
-                  <td className="py-3 px-4 border-b border-gray-200">{u.name}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">{u.email}</td>
-                  <td className="py-3 px-4 border-b border-gray-200">{u.age}</td>
+                  <td className="py-3 px-4 border-b border-gray-200">{user.name}</td>
+                  <td className="py-3 px-4 border-b border-gray-200">{user.email}</td>
+                  <td className="py-3 px-4 border-b border-gray-200">{user.age}</td>
                   <td className="py-3 px-4 border-b border-gray-200">
                     <div className="flex justify-center gap-2">
                       <Link
-            to={`/Update/${u._id}`}
+            to={`/Update/${user._id}`}
             className="bg-blue-600 text-white font-semibold hover:bg-blue-700 py-2 px-4 rounded-md transition-all shadow-md"
           >
          Update
@@ -65,7 +65,7 @@ function User() {
                       <button
                       
                       className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm transition-all"
-                      onClick={()=>handleDelete(u._id)}
+                      onClick={()=>handleDelete(user._id)}
                       >
                         Delete
                       </button>
