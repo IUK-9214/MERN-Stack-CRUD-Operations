@@ -6,7 +6,7 @@ function User() {
   const [user, setUser] = useState([])
 
   useEffect(() => {
-  axios.get(`${import.meta.env.VITE_API_URL}`)
+  axios.get(`${import.meta.env.VITE_API_URL}/users`) 
     .then(res => {
       if (Array.isArray(res.data)) {
         setUser(res.data);

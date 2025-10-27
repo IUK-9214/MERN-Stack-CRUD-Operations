@@ -26,7 +26,7 @@ useEffect(()=>{
 
 const Updated =(e)=>{
   e.preventDefault()
- axios.put(`${import.meta.env.VITE_API_URL}/UpdateUser/${id}`, { name, email, age })
+ axios.put(`${import.meta.env.VITE_API_URL}/updateUser/${id}`, { name, email, age }) 
 
   .then(result=>{
     console.log(result)
