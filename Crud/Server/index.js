@@ -9,7 +9,7 @@
     app.use(express.json());
 
     // ✅ MongoDB Connection
-    mongoose.connect(process.env.MONGO_URI)
+    mongoose.connect(`mongodb+srv://IbadUllahKhan:Ibad2004@cluster0.pbwdvv1.mongodb.net/Crud`)
       .then(() => console.log("✅ MongoDB Connected Successfully"))
       .catch(err => console.error("❌ MongoDB Connection Error:", err.message));
 
