@@ -8,19 +8,26 @@
     app.use(cors());
     app.use(express.json());
 
-    // ✅ MongoDB Connection
+  
     mongoose.connect(`mongodb+srv://IbadUllahKhan:Ibad2004@cluster0.pbwdvv1.mongodb.net/Crud`)
-      .then(() => console.log("✅ MongoDB Connected Successfully"))
-      .catch(err => console.error("❌ MongoDB Connection Error:", err.message));
+      .then(() => console.log(" MongoDB Connected Successfully"))
+      .catch(err => console.error("MongoDB Connection Error:", err.message));
 
-      console.log("🔍 Loaded MONGO_URI:", process.env.MONGO_URI ? "✅ Found" : "❌ Missing");
+  
 
-    // ✅ Test route
-    app.get('/', (req, res) => {
+    // Test route
+    app.get('/', async (req, res) => {
       res.send("🚀 Backend is running successfully!");
+      try {
+        const users = await UserModel.find();
+        res.status(200).json(users || []);
+      } catch (err) {
+        console.error("❌ Fetch error:", err);
+        res.status(500).json({ error: "Server Error" });
+      }
     });
 
-    // ✅ CRUD Routes
+    // CRUD Routes
     app.get('/api/users', async (req, res) => {   
       try {
         const users = await UserModel.find();
