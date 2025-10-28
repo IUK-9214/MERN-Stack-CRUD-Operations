@@ -15,7 +15,7 @@ function User() {
       }
     })
     .catch(err => {
-      console.error("❌ Error fetching users:", err);
+      console.error("Error fetching users:", err);
       setUser([]); // fallback
     });
 }, []);
