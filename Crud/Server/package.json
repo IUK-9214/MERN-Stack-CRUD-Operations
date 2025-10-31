@@ -1,5 +1,5 @@
 {
-  "name": "mern-crud-server",
+  "name": "server",
   "version": "1.0.0",
   "description": "Express backend for MERN CRUD app",
   "main": "index.js",
