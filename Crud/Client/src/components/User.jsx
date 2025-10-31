@@ -6,7 +6,7 @@ function User() {
   const [user, setUser] = useState([])
 
   useEffect(() => {
-  axios.get(`${import.meta.env.VITE_API_URL}/users`) 
+  axios.get(`${import.meta.env.VITE_API_URL}/api/users`) 
     .then(res => {
       if (Array.isArray(res.data)) {
         setUser(res.data);
@@ -22,7 +22,7 @@ function User() {
 
 
   const handleDelete=(id)=>{
-    axios.delete(`${import.meta.env.VITE_API_URL}/deleteUser/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}/api/deleteUser/${id}`)
     .then(res=>console.log(res)
     )
     .catch(err=>console.log(err)
