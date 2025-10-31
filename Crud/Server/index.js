@@ -3,6 +3,7 @@
     const mongoose = require('mongoose');
     const UserModel = require('./models/Users');
     require('dotenv').config();
+  
 
     const app = express();
     app.use(cors());
@@ -10,14 +11,14 @@
 
     // MongoDB Connection
     mongoose.connect(process.env.MONGO_URI)
-      .then(() => console.log("✅ MongoDB Connected Successfully"))
+      .then(() => console.log("MongoDB Connected Successfully"))
       .catch(err => console.error(" MongoDB Connection Error:", err.message));
 
       console.log(" Loaded MONGO_URI:", process.env.MONGO_URI ? "Found" : "Missing");
 
     //  Test route
     app.get('/', (req, res) => {
-      res.send("🚀 Backend is running successfully!");
+      res.send("Backend is running successfully!");
     });
 
     //  CRUD Routes
@@ -26,7 +27,7 @@
         const users = await UserModel.find();
         res.status(200).json(users || []);
       } catch (err) {
-        console.error("❌ Fetch error:", err);
+        console.error(" Fetch error:", err);
         res.status(500).json({ error: "Server Error" });
       }
     });
@@ -60,6 +61,11 @@
     });
 
 
-  
+ if (process.env.NODE_ENV !== "production") {
+  app.listen(5000, () => {
+    console.log("Local server running on port 5000");
+  });
+}
 
-    module.exports = app;
+module.exports = app; // ✅ export for Vercel
+
